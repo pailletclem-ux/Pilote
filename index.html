@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Pilote</title>
+  <meta name="description" content="Pilote — suivi de patrimoine personnel, données stockées uniquement sur l'appareil.">
+  <meta name="theme-color" content="#f6f7f9">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png" type="image/png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Pilote">
+  <!-- Aucune ressource externe : polices système (Inter/Manrope si installées), tout fonctionne hors ligne -->
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+  <div class="halos" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="app">
+    <aside class="side glass" aria-label="Navigation principale">
+      <div class="brand"><img class="logo" src="icons/icon-192.png" alt=""><b>Pilote</b></div>
+      <nav class="nav" id="sideNav"></nav>
+      <div class="side-foot"><span>Données stockées uniquement sur cet appareil</span></div>
+    </aside>
+    <main id="main"></main>
+  </div>
+  <div class="tabbar"><nav class="tab glass" id="tabNav" aria-label="Navigation"></nav></div>
+  <noscript>Pilote nécessite JavaScript.</noscript>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
