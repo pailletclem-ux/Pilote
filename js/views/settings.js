@@ -8,6 +8,8 @@ import { dateFr, esc, todayIso } from '../format.js';
 import { topbar, openSheet, closeSheet, toast } from './ui.js';
 import { applyTheme } from '../theme.js';
 
+export const APP_VERSION = '3 · 16/11/2026';
+
 export function renderSettings(main, nav) {
   const theme = setting('theme', 'auto');
   const lastBackup = setting('lastBackup', null);
@@ -21,7 +23,7 @@ export function renderSettings(main, nav) {
     </section>
     <div class="sec-h"><h2>Sauvegarde et synchronisation</h2><span>${lastBackup ? 'Dernière sauvegarde : ' + dateFr(lastBackup) : 'Aucune sauvegarde'}</span></div>
     <section class="list glass">
-      <div class="row"><div><div>Exporter une sauvegarde chiffrée</div><div class="d">Fichier .pilote protégé par mot de passe (AES-256). Rangez-le dans iCloud Drive / Google Drive pour le retrouver sur l’autre appareil.</div></div>
+      <div class="row"><div><div>Exporter une sauvegarde chiffrée</div><div class="d">Fichier protégé par mot de passe (AES-256). Rangez-le dans iCloud Drive / Google Drive pour le retrouver sur l’autre appareil.</div></div>
         <button class="btn small" type="button" id="bExp">Exporter</button></div>
       <div class="row"><div><div>Restaurer une sauvegarde</div><div class="d">Remplace toutes les données de cet appareil par celles du fichier.</div></div>
         <label class="btn small" for="fImp">Choisir…</label><input type="file" id="fImp" hidden></div>
@@ -31,6 +33,7 @@ export function renderSettings(main, nav) {
       <div class="row"><div><div>Effacer toutes les données</div><div class="d">Supprime définitivement les données de cet appareil.</div></div>
         <button class="btn small danger" type="button" id="bWipe">Effacer</button></div>
     </section>
+    <div class="hint">Version de l’application : ${APP_VERSION}</div>
     <div class="hint">Verrouillage Face ID / Touch ID / Windows Hello : prochaine étape du développement.</div>`;
 
   const sTheme = main.querySelector('#sTheme'); sTheme.value = theme;
@@ -56,10 +59,11 @@ function exportSheet(main, nav) {
     if (p1.length < 10) { err.hidden = false; err.textContent = 'Le mot de passe doit contenir au moins 10 caractères.'; return; }
     if (p1 !== p2) { err.hidden = false; err.textContent = 'Les deux mots de passe ne correspondent pas.'; return; }
     const text = await encryptBackup(await exportData(), p1);
-    const blob = new Blob([text], { type: 'application/octet-stream' });
-    const fileName = `pilote-${todayIso()}.pilote`;
+    const blob = new Blob([text], { type: 'application/json' });
+    // Extension .json : reconnue par le sélecteur de fichiers de l'iPhone
+    const fileName = `pilote-sauvegarde-${todayIso()}.json`;
     // Partage natif sur mobile (permet « Enregistrer dans Fichiers / Drive »), sinon téléchargement
-    const file = new File([blob], fileName, { type: 'application/octet-stream' });
+    const file = new File([blob], fileName, { type: 'application/json' });
     if (navigator.canShare?.({ files: [file] })) {
       try { await navigator.share({ files: [file], title: 'Sauvegarde Pilote' }); } catch { /* partage annulé */ }
     } else {
