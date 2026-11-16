@@ -24,7 +24,7 @@ export function renderSettings(main, nav) {
       <div class="row"><div><div>Exporter une sauvegarde chiffrée</div><div class="d">Fichier .pilote protégé par mot de passe (AES-256). Rangez-le dans iCloud Drive / Google Drive pour le retrouver sur l’autre appareil.</div></div>
         <button class="btn small" type="button" id="bExp">Exporter</button></div>
       <div class="row"><div><div>Restaurer une sauvegarde</div><div class="d">Remplace toutes les données de cet appareil par celles du fichier.</div></div>
-        <label class="btn small" for="fImp">Choisir…</label><input type="file" id="fImp" accept=".pilote,application/json" hidden></div>
+        <label class="btn small" for="fImp">Choisir…</label><input type="file" id="fImp" hidden></div>
     </section>
     <div class="sec-h"><h2>Données</h2><span>${data.accounts.length} enveloppe(s) · ${data.orders.length} ordre(s)</span></div>
     <section class="list glass">

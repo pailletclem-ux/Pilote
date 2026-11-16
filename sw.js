@@ -4,7 +4,7 @@
  *
  * À chaque nouvelle version publiée, incrémenter VERSION pour forcer la mise à jour.
  */
-const VERSION = 'pilote-v1';
+const VERSION = 'pilote-v2';
 const ASSETS = [
   './', 'index.html', 'manifest.webmanifest', 'css/app.css',
   'js/app.js', 'js/store.js', 'js/db.js', 'js/calc.js', 'js/format.js', 'js/presets.js', 'js/crypto.js', 'js/theme.js',
